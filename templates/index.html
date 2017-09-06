@@ -1,0 +1,35 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}
+外為レート表
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('.static', filename='style.css')}}">
+{%- endblock styles %}
+
+{% block content %}
+<div class=page align="center">
+<h2>外為レート表</h2>
+	<div class=maintable>
+		<table border=1 cellspacing=0 cellpadding=0>
+			<tr bgcolor="#dddddd">
+				<th>通貨ペア</th>
+				<th>レート</th>
+				<th>更新時刻</th>
+			</tr>
+			{% for d in fxdata %}
+			{% if loop.index is even %}
+			<tr bgcolor="#ffffe0">
+			{% else %}
+			<tr bgcolor="#ffffff">
+			{% endif %}
+				<td>{{fxdata[d]['id']}}</td>
+				<td>{{fxdata[d]['Rate']}}</td>
+				<td>{{fxdata[d]['Time']}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</div>
+</div>
+{% endblock %}
